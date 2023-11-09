@@ -31,22 +31,21 @@ public class TestBase {
 		
 		String browser = browser_maven!=null ? browser_maven : browser_properties;
 
-		if(driver == null)
-		{
-			if(browser.equalsIgnoreCase("chrome"))
-			{
-		System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"//src//test//resources//chromedriver.exe");
-		driver = new ChromeDriver();
-			}
-			if(browser.equalsIgnoreCase("firefox"))
-			{
+		if(driver == null) {
+			if(browser.equalsIgnoreCase("firefox")) {
 				System.setProperty("webdriver.gecko.driver","//Users//rahulshetty//Downloads//geckodriver 5");
 				driver = new FirefoxDriver();
+			}
+			if(browser.equalsIgnoreCase("chrome")) {
+				System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"//src//test//resources//chromedriver.exe");
+//				ChromeOptions options = new ChromeOptions();
+//				options.addArguments("--remote-allow-origins=*");
+				driver = new ChromeDriver();
 			}
 			assert driver != null;
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 			driver.manage().window().maximize();
-		driver.get(url);
+			driver.get(url);
 		}
 		
 		return driver;
